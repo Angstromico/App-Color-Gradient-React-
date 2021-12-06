@@ -1,3 +1,6 @@
+# Color Gradient React App
+![Screenshop](https://github.com/Angstromico/App-Color-Gradient-React-/blob/master/screencapture-localhost-3000-2021-12-05-19_45_54.png)
+# [See The App Here](https://manuel-morales-color-gradient-app-react.netlify.app/)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
