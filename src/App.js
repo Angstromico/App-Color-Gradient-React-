@@ -2,39 +2,35 @@ import React, { useState } from 'react';
 import SingleColor from './SingleColor';
 import Values from 'values.js';
 
+const options = [4, 11, 21, 41, 51, 101, 201];
+
 function App() {
   const [color, setColor] = useState('#FF6F61');
   const [error, setError] = useState(false);
   const [gradientNumber, setGradientNumber] = useState(20);
   const [blackWhite, setBlackWhite] = useState(5);
-  const [list, setList] = useState(new Values('#FF6F61').all(gradientNumber));
+  const [list, setList] = useState(new Values(color).all(gradientNumber));
   const [liStyles, setLiStyles] = useState(false);
   const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
   const year = new Date().getFullYear();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      let colors = new Values(color).all(gradientNumber);
-      setList(colors);
-      setError(false);
-    } catch (error) {
-      setError(true);
-    }
+    let colors = new Values(color).all(gradientNumber);
+    setList(colors);
+    setError(false);
   };
   const randomColor = () => {
-    try {
-      let hexColor = '#';
-      for (let i = 0; i < 6; i++) {
-        hexColor += hex[getRandomN()];
-      }
-      setColor(hexColor);
-      let colors = new Values(color).all(gradientNumber);
-      setList(colors);
-      setError(false);
-    } catch (error) {
-      setError(true);
+    let hexColor = '#';
+    for (let i = 0; i < 6; i++) {
+      hexColor += hex[getRandomN()];
     }
+
+    let colors = new Values(hexColor).all(gradientNumber);
+    setColor(hexColor);
+
+    setList(colors);
+    setError(false);
   };
   function getRandomN() {
     return Math.floor(Math.random() * hex.length);
@@ -47,42 +43,15 @@ function App() {
   };
   const pickLiNumber = (e) => {
     const targeting = e.target.value;
-    switch (targeting) {
-      case 4:
-        setGradientNumber(50);
-        setBlackWhite(2);
 
-        break;
-      case 11:
-        setGradientNumber(20);
-        setBlackWhite(5);
-        break;
-      case 21:
-        setGradientNumber(10);
-        setBlackWhite(10);
-        break;
-      case 41:
-        setGradientNumber(5);
-        setBlackWhite(20);
-        break;
-      case 51:
-        setGradientNumber(4);
-        setBlackWhite(25);
-        break;
-      case 101:
-        setGradientNumber(2);
-        setBlackWhite(50);
-        break;
-      case 201:
-        setGradientNumber(1);
-        setBlackWhite(100);
-        break;
-      default:
-        setGradientNumber(20);
-        setBlackWhite(5);
-    }
-    let colors = new Values(color).all(gradientNumber);
-    setList(colors);
+    const weight = Math.round(200 / targeting);
+    const bw = targeting / 2;
+
+    console.log('pick', color);
+
+    setBlackWhite(bw);
+    setList(new Values(color).all(weight));
+    setGradientNumber(weight);
   };
   return (
     <>
@@ -101,7 +70,7 @@ function App() {
           </button>
         </form>
       </section>
-      ;
+
       <div className="picker">
         <ul name="select" id="select" className="pick-number">
           <li
@@ -111,69 +80,19 @@ function App() {
           >
             --Select a Quantity of Examples--
           </li>
-          <li
-            value="4"
-            className={`option-center ${liStyles ? 'liStyles' : ''}`}
-            onMouseOver={backgroundDark}
-            onMouseOut={backgroundNormal}
-            onClick={pickLiNumber}
-          >
-            4
-          </li>
-          <li
-            value="11"
-            className={`option-center ${liStyles ? 'liStyles' : ''}`}
-            onMouseOver={backgroundDark}
-            onMouseOut={backgroundNormal}
-            onClick={pickLiNumber}
-          >
-            11
-          </li>
-          <li
-            value="21"
-            className={`option-center ${liStyles ? 'liStyles' : ''}`}
-            onMouseOver={backgroundDark}
-            onMouseOut={backgroundNormal}
-            onClick={pickLiNumber}
-          >
-            21
-          </li>
-          <li
-            value="41"
-            className={`option-center ${liStyles ? 'liStyles' : ''}`}
-            onMouseOver={backgroundDark}
-            onMouseOut={backgroundNormal}
-            onClick={pickLiNumber}
-          >
-            41
-          </li>
-          <li
-            value="51"
-            className={`option-center ${liStyles ? 'liStyles' : ''}`}
-            onMouseOver={backgroundDark}
-            onMouseOut={backgroundNormal}
-            onClick={pickLiNumber}
-          >
-            51
-          </li>
-          <li
-            value="101"
-            className={`option-center ${liStyles ? 'liStyles' : ''}`}
-            onMouseOver={backgroundDark}
-            onMouseOut={backgroundNormal}
-            onClick={pickLiNumber}
-          >
-            101
-          </li>
-          <li
-            value="201"
-            className={`option-center ${liStyles ? 'liStyles' : ''}`}
-            onMouseOver={backgroundDark}
-            onMouseOut={backgroundNormal}
-            onClick={pickLiNumber}
-          >
-            201
-          </li>
+
+          {options.map((count) => (
+            <li
+              key={count}
+              value={count}
+              className={`option-center ${liStyles ? 'liStyles' : ''}`}
+              onMouseOver={backgroundDark}
+              onMouseOut={backgroundNormal}
+              onClick={pickLiNumber}
+            >
+              {count}
+            </li>
+          ))}
         </ul>
         <button className="btn" onClick={randomColor}>
           Get Random Color
