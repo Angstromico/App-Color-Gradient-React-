@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import SingleColor from './SingleColor';
 import Values from 'values.js';
 
+const options = [4, 11, 21, 41, 51, 101, 201];
+
 function App() {
   const [color, setColor] = useState('');
   const [error, setError] = useState(false);
   const [gradientNumber, setGradientNumber] = useState(20);
   const [blackWhite, setBlackWhite] = useState(5);
-  const [list, setList] = useState(new Values('#FF6F61').all(gradientNumber));
+  const [list, setList] = useState(new Values(color).all(gradientNumber));
   const [liStyles, setLiStyles] = useState(false);
   const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
   const year = new Date().getFullYear();
