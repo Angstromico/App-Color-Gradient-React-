@@ -16,21 +16,27 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let colors = new Values(color).all(gradientNumber);
-    setList(colors);
-    setError(false);
+    try {
+      let colors = new Values(color).all(gradientNumber);
+      setList(colors);
+      setError(false);
+    } catch (error) {
+      setError(true);
+    }
   };
   const randomColor = () => {
-    let hexColor = '#';
-    for (let i = 0; i < 6; i++) {
-      hexColor += hex[getRandomN()];
+    try {
+      let hexColor = '#';
+      for (let i = 0; i < 6; i++) {
+        hexColor += hex[getRandomN()];
+      }
+      setColor(hexColor);
+      let colors = new Values(hexColor).all(gradientNumber);
+      setList(colors);
+      setError(false);
+    } catch (error) {
+      setError(true);
     }
-
-    let colors = new Values(hexColor).all(gradientNumber);
-    setColor(hexColor);
-
-    setList(colors);
-    setError(false);
   };
   function getRandomN() {
     return Math.floor(Math.random() * hex.length);
