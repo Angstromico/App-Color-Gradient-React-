@@ -65,6 +65,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/m
 This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
 ### Deployment
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cb4489de-fc47-4376-9c25-75f5d39616ee/deploy-status)](https://app.netlify.com/sites/manuel-morales-color-gradient-app-react/deploys
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
